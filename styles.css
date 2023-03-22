@@ -1,0 +1,187 @@
+body {
+  /* GLOBAL TOGGLE VARIABLES */
+  --toggle-label-FontSize: 1.2rem;
+  --toggle-switch-Width: 6rem;
+  --toggle-switch-Height: calc(var(--toggle-switch-Width) / 3);
+  --toggle-switch-BorderSize: 0.1rem;
+  --toggle-switchText-FontSize: 1.2rem;
+  --toggle-switchText-offset: 0.5rem;
+  --toggle-switchSlider-Width: 1.2rem;
+  --toggle-switchSlider-Height: var(--toggle-switchSlider-Width);
+  --toggle-switchSlider-offset: 0.4rem;
+
+  /* LIGHT MODE VARIABLES */
+  --sheet-BackgroundColor: rgb(245, 245, 245);
+  --sheet-Color: rgb(10, 10, 10);
+  --toggle-switch-BorderColor: rgb(158, 158, 158);
+  --toggle-switch-focus-Outline: rgb(5, 5, 5);
+  --toggle-switch-on-BackgroundColor: rgb(173, 216, 230);
+  --toggle-switch-off-BackgroundColor: rgba(173, 216, 230, 0.3);
+  --toggle-switch-on-Color: black;
+  --toggle-switch-off-Color: black;
+}
+
+/* DARK MODE VARIABLES */
+body.sheet-darkmode {
+  --sheet-BackgroundColor: rgb(18, 18, 18);
+  --sheet-Color: rgb(245, 245, 245);
+  --toggle-switch-BorderColor: rgba(158, 158, 158, 0.6);
+  --toggle-switch-focus-Outline: rgb(250, 250, 250);
+  --toggle-switch-on-BackgroundColor: rgb(138, 173, 184);
+  --toggle-switch-off-BackgroundColor: rgba(138, 173, 184, 0.3);
+  --toggle-switch-on-Color: rgb(56, 57, 57);
+  --toggle-switch-off-Color: rgb(207, 207, 207);
+}
+
+/* GENERAL STYLES */
+.sheetform,
+.sheet-darkmode .sheetform {
+  background-color: var(--sheet-BackgroundColor);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--sheet-Color);
+}
+
+.lota-sheet-attribute__is-editing[value='0'] ~ header .lota-edit-mode,
+.lota-sheet-attribute__is-editing[value='0'] ~ main .lota-edit-mode,
+.lota-sheet-attribute__is-editing[value='1'] ~ header .lota-view-mode,
+.lota-sheet-attribute__is-editing[value='1'] ~ main .lota-view-mode,
+.lota-sheet-attribute__is-npc[value='0'] ~ header .lota-npc-only,
+.lota-sheet-attribute__is-npc[value='0'] ~ main .lota-npc-only,
+.lota-sheet-attribute__is-npc[value='1'] ~ header .lota-pc-only,
+.lota-sheet-attribute__is-npc[value='1'] ~ main .lota-pc-only {
+  display: none;
+}
+
+/* GLOBAL SHEET TOGGLES */
+.lota-sheet-header__toggles {
+  display: flex;
+  column-gap: 5rem;
+}
+
+label.lota-sheet-toggle {
+  max-width: max-content;
+  padding: 0;
+}
+
+label.lota-sheet-toggle:hover {
+  cursor: pointer;
+}
+
+label.lota-sheet-toggle > .lota-sheet-toggle__label {
+  font-size: var(--toggle-label-FontSize);
+  vertical-align: middle;
+}
+
+label.lota-sheet-toggle > .lota-sheet-toggle__checkbox {
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+}
+
+.lota-sheet-toggle__checkbox:focus + .lota-sheet-toggle__switch {
+  outline: var(--toggle-switch-BorderSize) solid
+    var(--toggle-switch-focus-Outline);
+  outline-offset: 2px;
+}
+
+.lota-sheet-toggle__switch {
+  background-color: var(--toggle-switch-off-BackgroundColor);
+  border: var(--toggle-switch-BorderSize) solid var(--toggle-switch-BorderColor);
+  display: inline-block;
+  height: var(--toggle-switch-Height);
+  width: var(--toggle-switch-Width);
+  position: relative;
+  vertical-align: middle;
+}
+
+.lota-sheet-toggle__checkbox:checked + .lota-sheet-toggle__switch {
+  background-color: var(--toggle-switch-on-BackgroundColor);
+}
+
+.lota-sheet-toggle__switch::before {
+  content: 'ON';
+  color: var(--toggle-switch-on-Color);
+  left: var(--toggle-switchText-offset);
+}
+
+.lota-sheet-toggle__switch::after {
+  content: 'OFF';
+  color: var(--toggle-switch-off-Color);
+  right: var(--toggle-switchText-offset);
+}
+
+.lota-sheet-toggle__switch::before,
+.lota-sheet-toggle__switch::after {
+  font-size: var(--toggle-switchText-FontSize);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: opacity 350ms ease-out;
+}
+
+.lota-sheet-toggle__checkbox:not(:checked) + .lota-sheet-toggle__switch::before,
+.lota-sheet-toggle__checkbox:checked + .lota-sheet-toggle__switch::after {
+  opacity: 0;
+}
+
+.lota-sheet-toggle__slider {
+  background-color: white;
+  border: var(--toggle-switch-BorderSize) solid black;
+  height: var(--toggle-switchSlider-Height);
+  width: var(--toggle-switchSlider-Width);
+  position: absolute;
+  top: 50%;
+  left: var(--toggle-switchSlider-offset);
+  transform: translateY(-50%);
+  transition: background-color 250ms, transform 250ms;
+}
+
+.lota-sheet-toggle__checkbox:checked
+  + .lota-sheet-toggle__switch
+  > .lota-sheet-toggle__slider {
+  transform: translate(
+    calc(
+      var(--toggle-switch-Width) - (var(--toggle-switchSlider-offset) * 2) -
+        (var(--toggle-switch-BorderSize) * 2) - var(--toggle-switchSlider-Width)
+    ),
+    -50%
+  );
+}
+
+/* SHEET TABS */
+.lota-sheet-tablist {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+}
+
+.lota-sheet-tablist__tab:not(.lota-is-selected) > .lota-is-selected__text {
+  display: none;
+}
+
+.lota-sheet-tablist__panel:not(.lota-is-selected) {
+  display: none;
+}
+
+/* MODIFIER/UTILITY CLASSES */
+.lota-hidden {
+  display: none;
+}
+
+.lota-screen-reader {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}

@@ -1,0 +1,171 @@
+<!-- HIDDEN INPUTS FOR GLOBAL ATTRIBUTES -->
+<input
+  class="lota-sheet-attribute__is-editing"
+  type="hidden"
+  name="attr_is_editing"
+  value="0"
+/>
+<input
+  class="lota-sheet-attribute__is-npc"
+  type="hidden"
+  name="attr_is_npc"
+  value="0"
+/>
+<input type="hidden" name="attr_character_level" value="0" />
+<input type="hidden" name="attr_classlevels_display" value="" />
+
+<!-- SHEET CONTENT -->
+<header class="lota-sheet-header">
+  <div class="lota-sheet-header__toggles">
+    <!-- Edit Toggle -->
+    <label class="lota-sheet-toggle lota-sheet-header__edit-toggle">
+      <span class="lota-sheet-toggle__label">Edit Mode</span>
+      <input
+        class="lota-sheet-toggle__checkbox"
+        type="checkbox"
+        name="attr_is_editing"
+        value="1"
+      />
+      <span aria-hidden="true" class="lota-sheet-toggle__switch">
+        <span class="lota-sheet-toggle__slider"></span>
+      </span>
+    </label>
+    <!-- NPC Toggle -->
+    <label class="lota-sheet-toggle lota-sheet-header__edit-toggle">
+      <span class="lota-sheet-toggle__label">NPC</span>
+      <input
+        class="lota-sheet-toggle__checkbox"
+        type="checkbox"
+        name="attr_is_npc"
+        value="1"
+      />
+      <span aria-hidden="true" class="lota-sheet-toggle__switch">
+        <span class="lota-sheet-toggle__slider"></span>
+      </span>
+    </label>
+  </div>
+  <div class="lota-sheet-header__primary">
+    <div class="lota-sheet-header__name">
+      <div class="lota-edit-mode">
+        <input type="text" name="attr_character_name" />
+      </div>
+      <div class="lota-view-mode">
+        <h1>
+          <span name="attr_character_name"></span>
+        </h1>
+      </div>
+    </div>
+    <div class="lota-sheet-header__details">
+      <div class="lota-sheet-header__class-levels lota-pc-only">
+        <!-- PC Classes + Levels -->
+        <div class="lota-edit-mode">
+          <fieldset class="repeating_classlevels">
+            <input
+              class="lota-repeating-classlevels_class"
+              type="text"
+              list="classes"
+              name="attr_class"
+            />
+            <input
+              class="lota-repeating-classlevels_level"
+              type="number"
+              name="attr_level"
+              min="1"
+              value="1"
+            />
+            <select class="lota-repeating_select" name="attr_hitdie">
+              <option value="d4">d4</option>
+              <option value="d6">d6</option>
+              <option value="d8">d8</option>
+              <option value="d10">d10</option>
+              <option value="d12">d12</option>
+              <option value="d20">d20</option>
+            </select>
+          </fieldset>
+        </div>
+        <div class="lota-view-mode">
+          <span name="attr_classlevels_display"></span>
+        </div>
+      </div>
+      <div class="lota-sheet-header__meta">
+        <span class="lota-sheet-header__size">
+          <!-- Size -->
+        </span>
+        <span class="lota-sheet-header__creature-type lota-npc-only">
+          <!-- NPC Creature Type -->
+        </span>
+        <span class="lota-sheet-header__race">
+          <!-- Race -->
+        </span>
+        <span class="lota-sheet-header__alignment lota-npc-only">
+          <!-- NPC Alignment -->
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="lota-sheet-header__secondary lota-pc-only">
+    <div class="lota-sheet-header__rests">
+      <!-- Short + Long Rest -->
+    </div>
+    <div class="lota-sheet-header__inspiration">
+      <!-- PC Inspiration -->
+    </div>
+    <div class="lota-sheet-header__proficiency-bonus">
+      <!-- PC Proficiency Bonus -->
+    </div>
+    <div class="lota-sheet-header__xp">
+      <!-- PC XP -->
+    </div>
+  </div>
+</header>
+<main>
+  <!-- Character, Bio, Settings tabs -->
+  <ul role="list" class="lota-sheet-tablist" aria-label="Character sheet tabs">
+    <li>
+      <button
+        class="lota-sheet-tablist__tab lota-is-selected"
+        data-tab="character"
+      >
+        <span class="lota-screen-reader lota-is-selected__text">Selected</span>
+        Character
+      </button>
+    </li>
+    <li>
+      <button class="lota-sheet-tablist__tab" data-tab="journal">
+        <span class="lota-screen-reader lota-is-selected__text">Selected</span>
+        Journal
+      </button>
+    </li>
+    <li>
+      <button class="lota-sheet-tablist__tab" data-tab="settings">
+        <span class="lota-screen-reader lota-is-selected__text">Selected</span>
+        Settings
+      </button>
+    </li>
+  </ul>
+  <div class="lota-sheet-tablist__panel lota-is-selected" data-tab="character">
+    Character content
+  </div>
+  <div class="lota-sheet-tablist__panel" data-tab="journal">
+    Journal content
+  </div>
+  <div class="lota-sheet-tablist__panel" data-tab="settings">
+    Settings content
+  </div>
+</main>
+
+<!-- DATALISTS -->
+<datalist id="classes">
+  <option value="Airbender">Airbender</option>
+  <option value="Avatar">Avatar</option>
+  <option value="Barbarian">Barbarian</option>
+  <option value="Earthbender">Earthbender</option>
+  <option value="Fighter">Fighter</option>
+  <option value="Firebender">Firebender</option>
+  <option value="Gunslinger">Gunslinger</option>
+  <option value="Rogue">Rogue</option>
+  <option value="Waterbender">Waterbender</option>
+</datalist>
+
+<!-- SHEETWORKER -->
+<script type="text/worker"></script>
